@@ -6,7 +6,7 @@ public class GalaxyTransaction {
 
     public HashMap<String,String> wordToRomanMap=new HashMap<>();
     public HashMap<String,Double> tokenToValueMap = new HashMap<>();
-    public Validation validation=new Validation();
+
 
 
 
