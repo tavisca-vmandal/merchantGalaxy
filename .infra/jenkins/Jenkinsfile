@@ -36,7 +36,6 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-		    sudo systemctl enable docker
 		    docker build -t "mg" .
 		    docker run mg
                 ''',
