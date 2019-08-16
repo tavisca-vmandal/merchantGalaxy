@@ -1,9 +1,11 @@
+
 plugins {
     java
 }
 
 group = "com.tavisca.training.practice"
 version = "1.0-SNAPSHOT"
+
 
 repositories {
     mavenCentral()
@@ -30,5 +32,10 @@ tasks.named<Test>("test") {
     testLogging {
         showExceptions = true
         events("passed", "skipped", "failed")
+    }
+}
+val jar by tasks.getting(Jar::class) {
+    manifest {
+        attributes["Main-Class"] = "com.tavisca.training.practice.ClassificationParser"
     }
 }
