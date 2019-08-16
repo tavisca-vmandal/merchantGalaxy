@@ -36,7 +36,7 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
-		    sudo docker build -t "mg" .
+		    docker build -t "mg" .
 		    docker run mg
                 ''',
             label: "Building Docker Image"
