@@ -36,6 +36,8 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Building DockerImage ="
+		    docker build -t "mg" .
+		    docker run mg
                 ''',
             label: "Building Docker Image"
             }
