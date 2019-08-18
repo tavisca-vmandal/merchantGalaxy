@@ -47,6 +47,9 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am Pubishing DockerImage ="
+		    docker login -u vikaspmandal -p V9570073669m;
+                    docker tag mg vikaspmandal/mg_test
+                    docker push vikaspmandal/mg_test
                 ''',
             label: "Publishing Docker Image"
             }
