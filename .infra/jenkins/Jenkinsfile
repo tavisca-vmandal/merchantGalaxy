@@ -27,7 +27,7 @@ pipeline {
             steps {
                 sh script: '''
                     echo "I am in Sonarqube scan"
-		 
+		    ./gradlew sonarqube	
                 ''',
             label: "Running Sonarqube Scan"
             }
