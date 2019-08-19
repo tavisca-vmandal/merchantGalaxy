@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Converter {
 
-    private final HashMap<Character,Integer> romanToArabicMap=new HashMap<>(){{
+    private final HashMap<Character,Integer> romanToArabicMap=new HashMap<Character, Integer>(){{
 
         put('I',1);
         put('V',5);

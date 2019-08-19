@@ -12,11 +12,11 @@ public class ClassificationParser {
     public static void main(String[] args) throws Exception
     {
         GalaxyTransaction galaxyObject=new GalaxyTransaction();
-
         BufferedReader reader;
         try {
+
             reader = new BufferedReader(new FileReader(
-                    "C:\\Users\\vmandal\\IdeaProjects\\MGTTG\\src\\main\\java\\com\\tavisca\\training\\practice\\InputFile"));
+                    System.getProperty("user.dir")+"/main/java/com/tavisca/training/practice/InputFile"));
 
             String input = reader.readLine();
 

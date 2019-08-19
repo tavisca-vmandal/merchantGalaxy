@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                bat script: '''
+                    echo "I am in build step"
+		    gradlew.bat build
+                ''',
+            label: "Building Project"
+            }
+        }
+        stage('Test')
+        {
+            steps {
+                bat script: '''
+                    echo "I am in Test step"
+		    gradlew.bat test
+                ''',
+            label: "Running Unit Test Cases"
+            }
+        }
+        stage('Static Code Analysis')
+        {
+            steps {
+                bat script: '''
+                    echo "I am in Sonarqube scan"
+		    gradlew.bat sonarqube	
+                ''',
+            label: "Running Sonarqube Scan"
+            }
+        }
+        stage('Build DockerImage')
+        {
+            steps {
+                bat script: '''
+                    echo "I am Building DockerImage ="
+		    docker build -t "mg" .
+		    docker run mg
+                ''',
+            label: "Building Docker Image"
+            }
+        }
+        stage('Publish DockerImage')
+        {
+            steps {
+                bat script: '''
+                    echo "I am Pubishing DockerImage ="
+		    docker login -u vikaspmandal -p vikas_docker
+                    docker tag mg vikaspmandal/mg_test
+                    docker push vikaspmandal/mg_test
+                ''',
+            label: "Publishing Docker Image"
+            }
+        }
+    }
+	post{
+		always{
+			bat script:'''
+			docker logout
+			'''
+			deleteDir()
+		}
+	}
+}
+
