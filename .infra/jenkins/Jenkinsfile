@@ -3,10 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh script: '''
+                bat script: '''
                     echo "I am in build step"
-		    chmod 777 ./gradlew
-                    ./gradlew build
+		    gradlew.bat build
                 ''',
             label: "Building Project"
             }
@@ -14,10 +13,9 @@ pipeline {
         stage('Test')
         {
             steps {
-                sh script: '''
+                bat script: '''
                     echo "I am in Test step"
-		    chmod 777 ./gradlew
-                    ./gradlew test
+		    gradlew.bat test
                 ''',
             label: "Running Unit Test Cases"
             }
@@ -25,9 +23,9 @@ pipeline {
         stage('Static Code Analysis')
         {
             steps {
-                sh script: '''
+                bat script: '''
                     echo "I am in Sonarqube scan"
-		    ./gradlew sonarqube	
+		    gradlew.bat sonarqube	
                 ''',
             label: "Running Sonarqube Scan"
             }
@@ -35,7 +33,7 @@ pipeline {
         stage('Build DockerImage')
         {
             steps {
-                sh script: '''
+                bat script: '''
                     echo "I am Building DockerImage ="
 		    docker build -t "mg" .
 		    docker run mg
@@ -46,7 +44,7 @@ pipeline {
         stage('Publish DockerImage')
         {
             steps {
-                sh script: '''
+                bat script: '''
                     echo "I am Pubishing DockerImage ="
 		    docker login -u vikaspmandal -p vikas_docker
                     docker tag mg vikaspmandal/mg_test
@@ -58,6 +56,9 @@ pipeline {
     }
 	post{
 		always{
+			bat script:'''
+			docker logout
+			'''
 			deleteDir()
 		}
 	}
